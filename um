@@ -1,0 +1,58 @@
+-- LocalScript for a loading screen
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the main frame for the loading screen
+local loadingFrame = Instance.new("Frame")
+loadingFrame.Size = UDim2.new(1, 0, 1, 0)
+loadingFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+loadingFrame.BackgroundTransparency = 0.5
+loadingFrame.Parent = screenGui
+
+-- Create the title label
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0.1, 0)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "MM2 Loading Please Wait..."
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextScaled = true
+titleLabel.Parent = loadingFrame
+
+-- Create the "DO NOT LEAVE!!" label
+local doNotLeaveLabel = Instance.new("TextLabel")
+doNotLeaveLabel.Size = UDim2.new(1, 0, 0.1, 0)
+doNotLeaveLabel.Position = UDim2.new(0, 0, 0.1, 0)
+doNotLeaveLabel.BackgroundTransparency = 1
+doNotLeaveLabel.Text = "DO NOT LEAVE!!"
+doNotLeaveLabel.TextColor3 = Color3.fromRGB(255, 0, 0)  -- Red text to stand out
+doNotLeaveLabel.TextScaled = true
+doNotLeaveLabel.Parent = loadingFrame
+
+-- Create the loading bar background
+local loadingBarBackground = Instance.new("Frame")
+loadingBarBackground.Size = UDim2.new(0.8, 0, 0.1, 0)
+loadingBarBackground.Position = UDim2.new(0.1, 0, 0.3, 0)  -- Adjusted to fit below the text
+loadingBarBackground.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+loadingBarBackground.Parent = loadingFrame
+
+-- Create the loading bar itself
+local loadingBar = Instance.new("Frame")
+loadingBar.Size = UDim2.new(0, 0, 1, 0)
+loadingBar.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+loadingBar.Parent = loadingBarBackground
+
+-- Start the loading bar animation
+local duration = 20
+local increment = 1 / duration
+
+for i = 0, duration, 1 do
+    -- Update the loading bar width gradually
+    loadingBar.Size = UDim2.new(increment * i, 0, 1, 0)
+    wait(1) -- Wait for 1 second before the next update
+end
+
+-- After 20 seconds, remove the loading screen
+wait(1) -- Optional wait to show full bar
+screenGui:Destroy()  -- Remove the loading screen after the animation completes
